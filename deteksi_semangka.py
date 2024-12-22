@@ -61,12 +61,12 @@ df_train = process_images_in_folder(train_folder)
 print("Data Latih:")
 print(df_train.head())
 
-# Menggunakan K-Means untuk klasterisasi (2 klaster: busuk dan tidak busuk) pada data latih
+# Menggunakan K-Means untuk klasterisasi (2 klaster: busuk dan Busuk) pada data latih
 kmeans = KMeans(n_clusters=2, random_state=0)
 df_train['cluster'] = kmeans.fit_predict(df_train[['contrast', 'dissimilarity', 'homogeneity', 'energy', 'correlation', 'ASM']])
 
-# Menentukan label berdasarkan klaster (asumsi klaster 0 adalah busuk, klaster 1 adalah tidak busuk)
-df_train['label'] = df_train['cluster'].apply(lambda x: 'Busuk' if x == 0 else 'Tidak Busuk')
+# Menentukan label berdasarkan klaster (asumsi klaster 0 adalah busuk, klaster 1 adalah Busuk)
+df_train['label'] = df_train['cluster'].apply(lambda x: 'Tidak Busuk' if x == 0 else 'Busuk')
 
 # Menampilkan hasil klasterisasi data latih
 print("Hasil Klasterisasi Data Latih:")
@@ -85,8 +85,8 @@ print(df_test.head())
 # Menggunakan K-Means untuk klasterisasi (menggunakan model latih) pada data uji
 df_test['cluster'] = kmeans.predict(df_test[['contrast', 'dissimilarity', 'homogeneity', 'energy', 'correlation', 'ASM']])
 
-# Menentukan label berdasarkan klaster (asumsi klaster 0 adalah busuk, klaster 1 adalah tidak busuk)
-df_test['label'] = df_test['cluster'].apply(lambda x: 'Busuk' if x == 0 else 'Tidak Busuk')
+# Menentukan label berdasarkan klaster (asumsi klaster 0 adalah busuk, klaster 1 adalah Busuk)
+df_test['label'] = df_test['cluster'].apply(lambda x: 'Tidak Busuk' if x == 0 else 'Busuk')
 
 # Menampilkan hasil klasterisasi data uji
 print("Hasil Klasterisasi Data Uji:")
